@@ -49,4 +49,47 @@ describe('Users functional tests', () => {
       });
     });
   });
+  describe('When authenticating a user', () => {
+    it('should generate a token for a user', async () => {
+      const newUser = {
+        name: 'John Doe',
+        email: 'john@mailinator.com',
+        password: '123456',
+      };
+      await new User(newUser).save();
+      const response = await global.testRequest
+        .post('/users/authenticate')
+        .send({ email: newUser.email, password: newUser.password });
+      
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(
+        expect.objectContaining({ token: expect.any(String) })
+      );
+    });
+    it('should return 401 if the user with the given email is not found', async () => {
+      const newUser = {
+        email: 'some@mailinator.com',
+        password: '123456',
+      };
+
+      const response = await global.testRequest
+        .post('/users/authenticate')
+        .send(newUser);
+
+      expect(response.status).toBe(401);
+    });
+    it('should return 401 if the user is found but the password does not match', async () => {
+      const newUser = {
+        name: 'John Doe',
+        email: 'john@mailinator.com',
+        password: '123456',
+      };
+      await new User(newUser).save();
+      const response = await global.testRequest
+        .post('/users/authenticate')
+        .send({ email: 'john@mailinator.com', password: '12354' });
+
+      expect(response.status).toBe(401);
+    });
+  });
 });
