@@ -13,7 +13,7 @@ export class ForecastProcessingInternalError extends InternalError {
   }
 }
 
-export interface BeachForecast extends Beach, ForecastPoint {}
+export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
 
 export class Forecast {
   constructor(protected stormGlass = new StormGlass()) {}
