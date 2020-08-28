@@ -3,6 +3,8 @@ import { StormGlass } from '@src/clients/stormGlass';
 import stormGlassWeather3HoursFixture from '@test/fixtures/stormglass_weather_3_hours.json';
 import stormGlassNormalized3HoursFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
 
+jest.setTimeout(10000);
+
 jest.mock('@src/util/request');
 
 describe('StormGlass client', () => {

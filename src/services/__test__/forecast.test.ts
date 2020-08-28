@@ -3,6 +3,8 @@ import stormGlassNormalizedResponseFixture from '@test/fixtures/stormglass_norma
 import { Forecast, ForecastProcessingInternalError } from '../forecast';
 import { Beach, BeachPosition } from '@src/models/beach';
 
+jest.setTimeout(10000);
+
 jest.mock('@src/clients/stormGlass');
 
 describe('Forecast Service', () => {
