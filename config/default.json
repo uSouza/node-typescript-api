@@ -8,7 +8,7 @@
       }
     },
     "database": {
-      "mongoUrl": "mongodb://mongodb.local.com.br:27017/surf-forecast"
+      "mongoUrl": "mongodb://localhost:27017/surf-forecast"
     },
     "auth": {
       "key": "some-key",
