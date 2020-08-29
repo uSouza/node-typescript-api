@@ -13,6 +13,10 @@
     "auth": {
       "key": "some-key",
       "tokenExpiresIn": "200000000"
+    },
+    "logger": {
+      "enabled": true,
+      "level": "info"
     }
   }
 }
