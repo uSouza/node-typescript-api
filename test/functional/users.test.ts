@@ -47,7 +47,8 @@ describe('Users functional tests', () => {
       expect(response.body).toEqual({
         code: 409,
         error: 'Conflict',
-        message: 'User validation failed: email: already exists in the database.',
+        message:
+          'User validation failed: email: already exists in the database.',
       });
     });
   });
@@ -62,7 +63,7 @@ describe('Users functional tests', () => {
       const response = await global.testRequest
         .post('/users/authenticate')
         .send({ email: newUser.email, password: newUser.password });
-      
+
       expect(response.status).toBe(200);
       expect(response.body).toEqual(
         expect.objectContaining({ token: expect.any(String) })
@@ -105,12 +106,10 @@ describe('Users functional tests', () => {
       const token = AuthService.generateToken(user.toJSON());
       const { body, status } = await global.testRequest
         .get('/users/me')
-        .set({ 'x-access-token': token })
-      
+        .set({ 'x-access-token': token });
+
       expect(status).toBe(200);
-      expect(body).toMatchObject(
-        JSON.parse(JSON.stringify({ user }))
-      );
+      expect(body).toMatchObject(JSON.parse(JSON.stringify({ user })));
     });
     it('should return 404 when the user is not found', async () => {
       const newUser = {
@@ -122,8 +121,8 @@ describe('Users functional tests', () => {
       const token = AuthService.generateToken(user.toJSON());
       const { body, status } = await global.testRequest
         .get('/users/me')
-        .set({ 'x-access-token': token })
-      
+        .set({ 'x-access-token': token });
+
       expect(status).toBe(404);
       expect(body.message).toEqual('User not found');
     });

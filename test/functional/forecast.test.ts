@@ -21,7 +21,7 @@ describe('Beach forecast functional tests', () => {
       lng: 151.289824,
       name: 'Manly',
       position: GeoPosition.E,
-      user: user.id
+      user: user.id,
     };
     await new Beach(defaultBeach).save();
     token = AuthService.generateToken(user.toJSON());
@@ -40,6 +40,7 @@ describe('Beach forecast functional tests', () => {
         source: 'noaa',
         lat: '-33.792726',
         lng: '151.289824',
+        end: /(.*)/,
       })
       .reply(200, stormGlassWeather3HoursFixture);
     const { body, status } = await global.testRequest

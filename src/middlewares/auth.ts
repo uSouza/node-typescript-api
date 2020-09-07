@@ -12,6 +12,6 @@ export function authMiddleware(
     req.decodedUser = decodedUser;
     next();
   } catch (err) {
-    res.status?.(401).send({ code: 401, error: err.message })
+    res.status?.(401).send({ code: 401, error: err.message });
   }
 }

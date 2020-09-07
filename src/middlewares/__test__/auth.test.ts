@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { AuthService } from "@src/services/auth";
+import { AuthService } from '@src/services/auth';
 import { authMiddleware } from '@src/middlewares/auth';
 
 describe('AuthMiddleware', () => {
@@ -8,7 +8,7 @@ describe('AuthMiddleware', () => {
     const reqFake = {
       headers: {
         'x-access-token': jwtToken,
-      }
+      },
     };
     const resFake = {};
     const nextFake = jest.fn();
@@ -19,38 +19,38 @@ describe('AuthMiddleware', () => {
     const reqFake = {
       headers: {
         'x-access-token': 'invalid_token',
-      }
+      },
     };
-    const sendMock = jest.fn()
+    const sendMock = jest.fn();
     const resFake = {
       status: jest.fn(() => ({
         send: sendMock,
-      }))
+      })),
     };
     const nextFake = jest.fn();
     authMiddleware(reqFake, resFake as object, nextFake);
     expect(resFake.status).toHaveBeenCalledWith(401);
     expect(sendMock).toHaveBeenCalledWith({
       code: 401,
-      error: 'jwt malformed'
+      error: 'jwt malformed',
     });
   });
   it('should return 401 if there is not token', () => {
     const reqFake = {
-      headers: {}
+      headers: {},
     };
-    const sendMock = jest.fn()
+    const sendMock = jest.fn();
     const resFake = {
       status: jest.fn(() => ({
         send: sendMock,
-      }))
+      })),
     };
     const nextFake = jest.fn();
     authMiddleware(reqFake, resFake as object, nextFake);
     expect(resFake.status).toHaveBeenCalledWith(401);
     expect(sendMock).toHaveBeenCalledWith({
       code: 401,
-      error: 'jwt must be provided'
+      error: 'jwt must be provided',
     });
   });
 });

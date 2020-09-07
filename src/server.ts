@@ -30,12 +30,16 @@ export class SetupServer extends Server {
 
   private setupExpress(): void {
     this.app.use(bodyParser.json());
-    this.app.use(expressPino({
-      logger,
-    }));
-    this.app.use(cors({
-      origin: '*',
-    }));
+    this.app.use(
+      expressPino({
+        logger,
+      })
+    );
+    this.app.use(
+      cors({
+        origin: '*',
+      })
+    );
   }
 
   private setupErrorHandlers(): void {
@@ -46,7 +50,7 @@ export class SetupServer extends Server {
     const forecastController = new ForecastController();
     const beachesController = new BeachesController();
     const usersController = new UsersController();
-    
+
     this.addControllers([
       forecastController,
       beachesController,
@@ -60,7 +64,7 @@ export class SetupServer extends Server {
       apiSpec: apiSchema as OpenAPIV3.Document,
       validateRequests: true,
       validateResponses: true,
-    }).install(this.app)
+    }).install(this.app);
   }
 
   private async databaseSetup(): Promise<void> {

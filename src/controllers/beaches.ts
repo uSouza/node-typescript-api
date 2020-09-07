@@ -13,7 +13,7 @@ export class BeachesController extends BaseController {
       const beach = new Beach({ ...req.body, user: req.decodedUser?.id });
       const result = await beach.save();
       res.status(201).send(result);
-    } catch(error) {
+    } catch (error) {
       this.sendCreatedUpdatedErrorResponse(res, error);
     }
   }

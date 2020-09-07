@@ -83,7 +83,7 @@ describe('Forecast Service', () => {
             waveHeight: 0.46,
             windDirection: 310.48,
             windSpeed: 100,
-          }
+          },
         ],
       },
     ];
